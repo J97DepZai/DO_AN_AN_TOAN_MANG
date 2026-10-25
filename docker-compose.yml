@@ -2,7 +2,7 @@ version: "3.8"
 services:
   # 1. Database service
   jobportal-db:
-    container_name: mysqldb
+    container_name: quoc_mysqldb
     image: mysql:8.0
     restart: always
     environment:
@@ -17,7 +17,7 @@ services:
 
   # 2. Backend service
   jobportal-backend:
-    container_name: backend-container
+    container_name: quoc_backend-container
     image: chausu/jobportal-backend:${IMAGE_TAG:-latest}
     build:
       context: ./jobportal
@@ -32,7 +32,7 @@ services:
 
   # 3. Frontend service
   jobportal-frontend:
-    container_name: frontend-container
+    container_name: quoc_frontend-container
     image: chausu/jobportal-frontend:${IMAGE_TAG:-latest}
     build:
       context: ./react-social
@@ -45,11 +45,11 @@ services:
 
   # 4. NGINX service
   nginx:
-    container_name: nginx-container
+    container_name: quoc_nginx-container
     image: nginx:latest
     ports:
-      - "81:80"
-      - "8443:443" 
+      - "8085:80"
+      - "8445:443" 
     restart: always
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro 
